@@ -214,4 +214,4 @@ while not done:
         pygame.display.flip()
         sleep(5)
         done = True
-        pygame.QUI
+        pygame.QUIT
