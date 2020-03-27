@@ -196,7 +196,7 @@ while not done:
     pygame.display.flip()
     clock.tick(60)
 
-    if scorekeeper.scores[0] == 1:
+    if scorekeeper.scores[0] == 5:
         font = pygame.font.Font('freesansbold.ttf', 100)
         root.fill((10, 10, 30))
         text = font.render("YOU LOSE", True, (255, 200, 200))

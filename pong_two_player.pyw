@@ -91,7 +91,7 @@ class Ball:
             self.location[1] += 2
 
         #bounce off left paddle
-        if self.location[0] < player1.MARGIN + player1.WIDTH + self.SIZE and self.location[0] > player1.MARGIN + self.SIZE - self.speed:
+        if self.location[0] < player1.MARGIN + player1.WIDTH + self.SIZE and self.location[0] > player1.MARGIN + self.SIZE - self.speed: #detects if ball is near the paddle
             if self.location[1] + self.SIZE > player1.location and self.location[1] - self.SIZE < player1.location + player1.SIZE:
                 #prevents ball from getting stuck if saved at the last second and flips velocity
                 ball.location[0] = player1.MARGIN + player1.WIDTH + self.SIZE
@@ -161,24 +161,6 @@ while not done:
     if pressed[pygame.K_s]: player1.move('down')
     if pressed[pygame.K_r]: newGame()
 
-    if scorekeeper.scores[0] == 10:
-        root.fill(BACKGROUND)
-        text = font.render("PLAYER ONE WINS!", True, (255, 255, 255))
-        root.blit(text,(DISP_WIDTH//2 - text.get_width() // 2, DISP_HEIGHT//2 - text.get_height() // 2))
-        pygame.display.flip()
-        sleep(5)
-        done = True
-        pygame.QUIT
-    if scorekeeper.scores[1] == 10:
-        root.fill(BACKGROUND)
-        text = font.render("PLAYER TWO WINS!", True, (255, 255, 255))
-        root.blit(text,(DISP_WIDTH//2 - text.get_width() // 2, DISP_HEIGHT//2 - text.get_height() // 2))
-        pygame.display.flip()
-        sleep(5)
-        done = True
-        pygame.QUIT
-
-
     #update game objects
     player1.update()
     player2.update()
@@ -186,3 +168,20 @@ while not done:
     scorekeeper.display()
     pygame.display.flip()
     clock.tick(60)
+
+    if scorekeeper.scores[0] == 5:
+        root.fill(BACKGROUND)
+        text = font.render("PLAYER ONE WINS!", True, (255, 255, 255))
+        root.blit(text,(DISP_WIDTH//2 - text.get_width() // 2, DISP_HEIGHT//2 - text.get_height() // 2))
+        pygame.display.flip()
+        sleep(5)
+        done = True
+        pygame.QUIT
+    if scorekeeper.scores[1] == 5:
+        root.fill(BACKGROUND)
+        text = font.render("PLAYER TWO WINS!", True, (255, 255, 255))
+        root.blit(text,(DISP_WIDTH//2 - text.get_width() // 2, DISP_HEIGHT//2 - text.get_height() // 2))
+        pygame.display.flip()
+        sleep(5)
+        done = True
+        pygame.QUIT
