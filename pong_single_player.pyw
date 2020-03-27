@@ -5,7 +5,7 @@ from time import sleep
 
 DISP_WIDTH = 1000
 DISP_HEIGHT = 500
-BACKGROUND = (25, 30, 40)
+BACKGROUND = (10, 10, 30)
 
 pygame.init()
 pygame.display.set_caption("Pong")
@@ -29,7 +29,7 @@ class Scorekeeper:
         self.scores[player - 1] += points
 
     def display(self):
-        text = font.render("{}    {}".format(self.scores[0], self.scores[1]), True, (10, 10, 30))
+        text = font.render("{}    {}".format(self.scores[0], self.scores[1]), True, (20, 50, 55))
         root.blit(text,(DISP_WIDTH//2 - text.get_width() // 2, DISP_HEIGHT//2 - text.get_height() // 2))
 
 class Player:
