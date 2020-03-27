@@ -188,7 +188,15 @@ while not done:
     if pressed[pygame.K_DOWN]: player2.move('down')
     if pressed[pygame.K_r]: newGame()
 
-    if scorekeeper.scores[0] == 5:
+    #update game objects
+    scorekeeper.display()
+    player1.update()
+    player2.update()
+    ball.update()
+    pygame.display.flip()
+    clock.tick(60)
+
+    if scorekeeper.scores[0] == 1:
         font = pygame.font.Font('freesansbold.ttf', 100)
         root.fill((10, 10, 30))
         text = font.render("YOU LOSE", True, (255, 200, 200))
@@ -207,12 +215,3 @@ while not done:
         sleep(5)
         done = True
         pygame.QUI
-
-
-    #update game objects
-    scorekeeper.display()
-    player1.update()
-    player2.update()
-    ball.update()
-    pygame.display.flip()
-    clock.tick(60)
