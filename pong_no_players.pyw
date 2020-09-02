@@ -28,10 +28,6 @@ class Scorekeeper:
     def addPoint(self, player, points):
         self.scores[player - 1] += points
 
-    def display(self):
-        text = font.render("{}    {}".format(self.scores[0], self.scores[1]), True, (20, 50, 55))
-        root.blit(text,(DISP_WIDTH//2 - text.get_width() // 2, DISP_HEIGHT//2 - text.get_height() // 2))
-
 class Player:
     def __init__(self, player):
         self.MARGIN = 20
@@ -100,7 +96,8 @@ class Ball:
         self.SIZE = 8
         self.ACCELERATION = .8
         self.MAXANGLE = .4 * math.pi
-        self.speed = 8
+        self.MAXSPEED = 40
+        self.speed = 40
         self.location = [DISP_WIDTH/2, DISP_HEIGHT/2]
         self.angle = random.randint(0, 1)*math.pi
         self.angle += map(random.random(), 0, 1, -0.5, 0.5)
@@ -132,14 +129,16 @@ class Ball:
             if self.location[1] + self.SIZE > player1.location and self.location[1] - self.SIZE < player1.location + player1.SIZE:
                 #prevents ball from getting stuck if saved at the last second and flips velocity
                 ball.location[0] = player1.MARGIN + player1.WIDTH + self.SIZE
-                self.speed += self.ACCELERATION
+                if self.speed < self.MAXSPEED:
+                    self.speed += self.ACCELERATION
                 self.angle = map(self.location[1], player1.location, player1.location + player1.SIZE, -self.MAXANGLE, self.MAXANGLE)
 
         #bounce off right paddle
         if self.location[0] > DISP_WIDTH - player2.MARGIN - player2.WIDTH - self.SIZE and self.location[0] < DISP_WIDTH - player2.MARGIN - self.SIZE + self.speed:
             if self.location[1] + self.SIZE > player2.location and self.location[1] - self.SIZE< player2.location + player2.SIZE:
                 ball.location[0] = DISP_WIDTH - player2.MARGIN - player2.WIDTH - self.SIZE
-                self.speed += self.ACCELERATION
+                if self.speed < self.MAXSPEED:
+                    self.speed += self.ACCELERATION
                 self.angle = map(self.location[1], player2.location, player2.location + player2.SIZE, self.MAXANGLE + math.pi, -self.MAXANGLE + math.pi)
 
         #points system
@@ -198,7 +197,6 @@ while not done:
     if pressed[pygame.K_r]: newGame()
 
     #update game objects
-    scorekeeper.display()
     player1.update()
     player2.update()
     ball.update()
