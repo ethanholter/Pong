@@ -1,7 +1,8 @@
-import pygame
-import random
 import math
+import random
 from time import sleep
+
+import pygame
 
 DISP_WIDTH = 1000
 DISP_HEIGHT = 500
@@ -97,7 +98,7 @@ class Ball:
         self.ACCELERATION = .8
         self.MAXANGLE = .4 * math.pi
         self.MAXSPEED = 40
-        self.speed = 40
+        self.speed = 8
         self.location = [DISP_WIDTH/2, DISP_HEIGHT/2]
         self.angle = random.randint(0, 1)*math.pi
         self.angle += map(random.random(), 0, 1, -0.5, 0.5)
